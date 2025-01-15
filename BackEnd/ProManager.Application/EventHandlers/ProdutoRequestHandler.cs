@@ -1,0 +1,28 @@
+﻿using ProManager.Application.DTOs.Input;
+using ProManager.Application.Validators;
+
+namespace ProManager.Application.EventHandlers
+{
+    public class ProdutoRequestHandler
+    {
+        public static ProdutoValidationResult ValidateProduto(ProdutoPostDTO produto)
+        {
+            var result = new ProdutoValidationResult();
+
+            if (produto == null)
+            {
+                result.AddError("O produto não pode ser nulo.");
+                return result;
+            }
+
+            if (string.IsNullOrWhiteSpace(produto.Codigo.ToString()) || produto.Codigo.ToString().Length > 50)
+                result.AddError("O campo 'Codigo' é obrigatório e deve ter no máximo 50 caracteres.");
+
+            if (produto.Preco <= 0)
+                result.AddError("O preço deve ser maior que zero.");
+
+            return result;
+        }
+         
+    }
+}
