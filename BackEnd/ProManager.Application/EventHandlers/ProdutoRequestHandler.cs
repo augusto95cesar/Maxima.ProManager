@@ -1,13 +1,13 @@
-﻿using ProManager.Application.DTOs.Input;
-using ProManager.Application.Validators;
+﻿using ProManager.Application.DTOs.Input; 
+using ProManager.Domain.ValueObjects;
 
 namespace ProManager.Application.EventHandlers
 {
-    public class ProdutoRequestHandler
+    public static class ProdutoRequestHandler
     {
-        public static ProdutoValidationResult ValidateProduto(ProdutoPostDTO produto)
+        public static ValidationError ValidateProduto(this ProdutoPostDTO produto)
         {
-            var result = new ProdutoValidationResult();
+            var result = new ValidationError();
 
             if (produto == null)
             {

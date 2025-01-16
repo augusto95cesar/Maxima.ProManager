@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProManager.Application.DTOs.Input;
 using ProManager.Application.EventHandlers;
 using ProManager.Application.Interfaces;
-using ProManager.Application.Mappers;
+using ProManager.Application.Mappers; 
 
 namespace ProManager.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class ProdutosController : ControllerBase
@@ -14,7 +16,7 @@ namespace ProManager.API.Controllers
 
         public ProdutosController(IProdutoService produtoService)
         {
-            _produtoService = produtoService;
+            _produtoService = produtoService; 
         }
 
         [HttpGet]
@@ -23,7 +25,7 @@ namespace ProManager.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ProdutoPostDTO dtoInputProduto)
         {
-            var validationResult = ProdutoRequestHandler.ValidateProduto(dtoInputProduto);
+            var validationResult = dtoInputProduto.ValidateProduto(); 
             if (!validationResult.IsValid) return BadRequest(validationResult.Errors);
 
             await _produtoService.AdicionarAsync(dtoInputProduto.Map());

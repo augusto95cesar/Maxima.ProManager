@@ -14,8 +14,4 @@
     <ProjectReference Include="..\ProManager.Domain\ProManager.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\DbContext\" />
-  </ItemGroup>
-
 </Project>

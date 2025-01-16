@@ -1,6 +1,6 @@
-﻿namespace ProManager.Application.Validators
+﻿namespace ProManager.Domain.ValueObjects
 {
-    public class ProdutoValidationResult 
+    public class ValidationError
     {
         public bool IsValid => !Errors.Any();
         public List<string> Errors { get; } = new();
