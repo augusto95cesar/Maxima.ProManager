@@ -16,8 +16,9 @@ namespace ProManager.Infrastructure.Data.Repositories
 
         public async Task<IEnumerable<Produto>> GetAllAsync()
         {
-            const string sql = "SELECT  CODIGO, DESCRICAO, DEPARTAMENTO, PRECO, STATUS, ACOES FROM PRODUTOS";
-            return await _dbConnection.QueryAsync<Produto>(sql);
+            bool status = true;
+            const string sql = "SELECT  CODIGO, DESCRICAO, DEPARTAMENTO, PRECO, STATUS, ACOES FROM PRODUTOS WHERE STATUS = @status";
+            return await _dbConnection.QueryAsync<Produto>(sql, new { status = status });
         }
 
         public async Task AddAsync(Produto produto)
@@ -43,8 +44,10 @@ namespace ProManager.Infrastructure.Data.Repositories
 
         public async Task<bool> DeleteAsync(string codigo)
         {
-            const string sql = "DELETE FROM PRODUTOS   WHERE codigo = @codigo";
-            var rowsAffected = await _dbConnection.ExecuteAsync(sql, new { codigo = codigo });
+            bool status = false;
+            //const string sql = "DELETE FROM PRODUTOS   WHERE codigo = @codigo";
+            const string sql = "UPDATE PRODUTOS SET STATUS = @status WHERE CODIGO = @codigo";
+            var rowsAffected = await _dbConnection.ExecuteAsync(sql, new { status = status, codigo = codigo });
             return rowsAffected > 0;
         }
 
