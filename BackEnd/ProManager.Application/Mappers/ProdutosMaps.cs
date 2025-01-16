@@ -17,7 +17,7 @@ namespace ProManager.Application.Mappers
                 r.Add(new ProdutoDTO
                 {
                     Codigo = p.Codigo,
-                    Departameto = p.Departameto,
+                    Departameto = p.Departamento,
                     Descrição = p.Descricao,
                     Preço = p.Preco
                 });
@@ -33,9 +33,9 @@ namespace ProManager.Application.Mappers
                 Codigo = p.Codigo,
                 Descricao = p.Descricao,
                 Preco = p.Preco,
-                Departameto = p.Departameto,
+                Departamento = p.Departamento,
                 Status = true,
-                AcaoProduto = AcoesProduto.Editar
+                Acoes = AcoesProduto.Editar
             };
 
             return r;

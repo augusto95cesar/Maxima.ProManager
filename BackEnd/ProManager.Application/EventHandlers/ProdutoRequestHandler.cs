@@ -26,10 +26,10 @@ namespace ProManager.Application.EventHandlers
             if (string.IsNullOrWhiteSpace(produto.Descricao.ToString()))
                 result.AddError("O campo 'Descricao' é obrigatório.");
 
-            if (string.IsNullOrWhiteSpace(produto.Departameto.ToString()))
+            if (string.IsNullOrWhiteSpace(produto.Departamento.ToString()))
                 result.AddError("O campo 'Departameto' é obrigatório");
 
-            if (string.IsNullOrWhiteSpace(departamentoService.Get(produto.Departameto.ToString())?.Id))
+            if (string.IsNullOrWhiteSpace(departamentoService.Get(produto.Departamento.ToString())?.Id))
                 result.AddError("O campo 'Departameto' não está cadastrado!");
 
             return result;

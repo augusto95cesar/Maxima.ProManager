@@ -1,9 +1,20 @@
-CREATE TABLE produtos (
-    id VARCHAR(50) PRIMARY KEY, -- Identificador único da tabela
-    codigo VARCHAR(50) NOT NULL, -- Código do produto
-    descricao VARCHAR(255) NOT NULL, -- Descrição do produto
-    departamento VARCHAR(100), -- Departamento ao qual o produto pertence
-    preco DECIMAL(10, 2) NOT NULL, -- Preço do produto com duas casas decimais
-    status BOOLEAN NOT NULL DEFAULT TRUE, -- Status do produto (ativo/inativo)
-    acoes INT NOT NULL -- (acoes IN ('Criar', 'Atualizar', 'Excluir')) -- Enumeração para ações
-);
+-- Table: public.produtos
+
+-- DROP TABLE IF EXISTS public.produtos;
+
+CREATE TABLE IF NOT EXISTS public.produtos
+(
+    id character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    codigo character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    descricao character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    departamento character varying(3) COLLATE pg_catalog."default",
+    preco numeric(10,2) NOT NULL,
+    status boolean NOT NULL DEFAULT 'true',
+    acoes integer NOT NULL,
+    CONSTRAINT produtos_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.produtos
+    OWNER to postgres;

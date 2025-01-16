@@ -18,7 +18,7 @@ namespace ProManager.Domain.Entity
         public string Descricao { get; set; }
 
         //Departamento - Lista de departamentos - Caixa de Seleção(Será consumido via GET da api criada)
-        public string Departameto { get; set; }
+        public string Departamento { get; set; }
 
         //Preço - Preço do Produto - Decimal
         public decimal Preco { get; set; }
@@ -27,6 +27,6 @@ namespace ProManager.Domain.Entity
         public bool Status { get; set; }
 
         //Ações - Editar / Excluir - A exclusão é lógica e não física
-        public AcoesProduto AcaoProduto { get; set; }
+        public AcoesProduto Acoes { get; set; }
     }
 }

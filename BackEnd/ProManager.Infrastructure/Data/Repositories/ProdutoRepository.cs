@@ -16,21 +16,21 @@ namespace ProManager.Infrastructure.Data.Repositories
 
         public async Task<IEnumerable<Produto>> GetAllAsync()
         {
-            const string sql = "SELECT * FROM PRODUTOS";
+            const string sql = "SELECT ID, CODIGO, DESCRICAO, DEPARTAMENTO, PRECO, STATUS, ACOES FROM PRODUTOS";
             return await _dbConnection.QueryAsync<Produto>(sql);
         }
 
         public async Task<Produto> GetByIdAsync(int id)
         {
-            const string sql = "SELECT * FROM PRODUTOS WHERE id = @Id";
+            const string sql = "SELECT ID, CODIGO, DESCRICAO, DEPARTAMENTO, PRECO, STATUS, ACOES FROM PRODUTOS WHERE codigo = @Id";
             return await _dbConnection.QueryFirstOrDefaultAsync<Produto>(sql, new { Id = id });
         }
 
         public async Task AddAsync(Produto produto)
         {
             const string sql = @"
-                INSERT INTO PRODUTOS (guild, codigo, descricao, departamento, preco, status, acoes)
-                VALUES (@Guild, @Codigo, @Descricao, @Departamento, @Preco, @Status, @Acoes)
+                INSERT INTO PRODUTOS (id, codigo, descricao, departamento, preco, status, acoes)
+                VALUES (@Id, @Codigo, @Descricao, @Departamento, @Preco, @Status, @Acoes)
                 --RETURNING id;";
             //return await _dbConnection.ExecuteScalarAsync<int>(sql, produto);
             await _dbConnection.ExecuteScalarAsync(sql, produto);
@@ -40,9 +40,9 @@ namespace ProManager.Infrastructure.Data.Repositories
         {
             const string sql = @"
                 UPDATE PRODUTOS 
-                SET guild = @Guild, codigo = @Codigo, descricao = @Descricao, 
+                SET codigo = @Codigo, descricao = @Descricao, 
                     departamento = @Departamento, preco = @Preco, status = @Status, acoes = @Acoes
-                WHERE id = @Id";
+                WHERE codigo = @Codigo";
             var rowsAffected = await _dbConnection.ExecuteAsync(sql, produto);
             return rowsAffected > 0;
         }
