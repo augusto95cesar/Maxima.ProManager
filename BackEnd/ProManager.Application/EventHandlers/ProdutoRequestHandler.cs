@@ -1,4 +1,5 @@
 ﻿using ProManager.Application.DTOs.Input;
+using ProManager.Application.Interfaces;
 using ProManager.Application.Services;
 using ProManager.Domain.ValueObjects;
 
@@ -6,7 +7,7 @@ namespace ProManager.Application.EventHandlers
 {
     public static class ProdutoRequestHandler
     {
-        public static ValidationError ValidateProduto(this ProdutoPostDTO produto)
+        public static ValidationError ValidateProduto(this ProdutoPostDTO produto, IProdutoService _produtoService)
         {
             var departamentoService = new DepartamentoService();
             var result = new ValidationError();
@@ -14,6 +15,12 @@ namespace ProManager.Application.EventHandlers
             if (produto == null)
             {
                 result.AddError("O produto não pode ser nulo.");
+                return result;
+            }
+             
+            if (_produtoService.ProdutoExist(produto.Codigo).Result)
+            {
+                result.AddError($"O produto '{produto.Codigo}' já está cadastrado.");
                 return result;
             }
 

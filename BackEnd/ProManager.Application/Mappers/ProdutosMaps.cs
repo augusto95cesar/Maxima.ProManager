@@ -18,8 +18,8 @@ namespace ProManager.Application.Mappers
                 {
                     Codigo = p.Codigo,
                     Departameto = p.Departamento,
-                    Descrição = p.Descricao,
-                    Preço = p.Preco
+                    Descricao = p.Descricao,
+                    Preco = p.Preco
                 });
 
             return r;

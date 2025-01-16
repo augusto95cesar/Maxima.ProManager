@@ -16,14 +16,8 @@ namespace ProManager.Infrastructure.Data.Repositories
 
         public async Task<IEnumerable<Produto>> GetAllAsync()
         {
-            const string sql = "SELECT ID, CODIGO, DESCRICAO, DEPARTAMENTO, PRECO, STATUS, ACOES FROM PRODUTOS";
+            const string sql = "SELECT  CODIGO, DESCRICAO, DEPARTAMENTO, PRECO, STATUS, ACOES FROM PRODUTOS";
             return await _dbConnection.QueryAsync<Produto>(sql);
-        }
-
-        public async Task<Produto> GetByIdAsync(int id)
-        {
-            const string sql = "SELECT ID, CODIGO, DESCRICAO, DEPARTAMENTO, PRECO, STATUS, ACOES FROM PRODUTOS WHERE codigo = @Id";
-            return await _dbConnection.QueryFirstOrDefaultAsync<Produto>(sql, new { Id = id });
         }
 
         public async Task AddAsync(Produto produto)
@@ -47,11 +41,17 @@ namespace ProManager.Infrastructure.Data.Repositories
             return rowsAffected > 0;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(string codigo)
         {
-            const string sql = "DELETE FROM PRODUTOS WHERE id = @Id";
-            var rowsAffected = await _dbConnection.ExecuteAsync(sql, new { Id = id });
+            const string sql = "DELETE FROM PRODUTOS   WHERE codigo = @codigo";
+            var rowsAffected = await _dbConnection.ExecuteAsync(sql, new { codigo = codigo });
             return rowsAffected > 0;
+        }
+
+        public async Task<Produto?> GetByCodigoAsync(string codigo)
+        {
+            const string sql = "SELECT CODIGO, DESCRICAO, DEPARTAMENTO, PRECO, STATUS, ACOES FROM PRODUTOS WHERE codigo = @codigo";
+            return await _dbConnection.QueryFirstOrDefaultAsync<Produto>(sql, new { codigo = codigo });
         }
     }
 }

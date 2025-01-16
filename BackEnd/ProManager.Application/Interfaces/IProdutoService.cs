@@ -4,10 +4,10 @@ namespace ProManager.Application.Interfaces
 {
     public interface IProdutoService
     {
-        Task<IEnumerable<Produto>> ObterTodosAsync();
-        Task<Produto> ObterPorIdAsync(int id);
+        Task<IEnumerable<Produto>> ObterTodosAsync(); 
         Task AdicionarAsync(Produto produto);
         Task<bool> AtualizarAsync(Produto produto);
-        Task<bool> RemoverAsync(int id);
+        Task<bool> RemoverAsync(string id);
+        Task<bool> ProdutoExist(string codigo);
     }
 }

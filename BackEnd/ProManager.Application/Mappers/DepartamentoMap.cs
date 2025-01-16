@@ -13,8 +13,8 @@ namespace ProManager.Application.Mappers
             {
                 r.Add(new DepartamentoDTO
                 {
-                    Código = i.Id,
-                    Descrição = i.Nome
+                    Codigo = i.Id,
+                    Descricao = i.Nome
                 });
             }
 

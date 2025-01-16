@@ -1,8 +1,8 @@
-import { Component, OnInit  } from '@angular/core';
-import { RouterOutlet, Router, NavigationEnd  } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
 import { SidebarComponent } from './sidebar/sidebar.component'; // Importe o componente Sidebar
- import {  NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 
 
 @Component({
@@ -10,12 +10,11 @@ import { SidebarComponent } from './sidebar/sidebar.component'; // Importe o com
   imports: [RouterOutlet, SidebarComponent, NgIf],
   templateUrl: './app.component.html'
 })
-export class AppComponent 
-//{
- implements OnInit {
-    isLoginRoute: boolean | any ;
+export class AppComponent implements OnInit {
+  
+  isLoginRoute: boolean | any;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.router.events
@@ -23,8 +22,6 @@ export class AppComponent
         filter(event => event instanceof NavigationEnd)
       )
       .subscribe(() => {
-        // Verifica se a rota atual é a de login
-        //alert(this.router.url)
         this.isLoginRoute = this.router.url !== '/';
       });
   }

@@ -1,0 +1,80 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Cadastro de Produto</h2>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <!-- Nome do Produto -->
+      <div class="mb-3">
+        <label for="productName" class="form-label">Código do Produto</label>
+        <input
+          type="text"
+          id="productName"
+          class="form-control"
+          formControlName="codigo"
+          placeholder="Digite o nome do produto"
+          [ngClass]="{'is-invalid': productForm.get('codigo')?.touched && productForm.get('codigo')?.invalid}"
+        />
+        <div *ngIf="productForm.get('codigo')?.touched && productForm.get('codigo')?.invalid" class="invalid-feedback">
+          O nome do produto é obrigatório.
+        </div>
+      </div>
+  
+      <!-- Descrição -->
+      <div class="mb-3">
+        <label for="productDescription" class="form-label">Descrição</label>
+        <textarea
+          id="productDescription"
+          class="form-control"
+          formControlName="descricao"
+          rows="3"
+          placeholder="Digite a descrição do produto"
+        ></textarea>
+      </div>
+  
+      <!-- Preço -->
+      <div class="mb-3">
+        <label for="productPrice" class="form-label">Preço</label>
+        <input
+          type="number"
+          id="productPrice"
+          class="form-control"
+          formControlName="preco"
+          placeholder="Digite o preço do produto"
+          step="0.01"
+          [ngClass]="{'is-invalid': productForm.get('preco')?.touched && productForm.get('preco')?.invalid}"
+        />
+        <div *ngIf="productForm.get('preco')?.touched && productForm.get('preco')?.invalid" class="invalid-feedback">
+          O preço é obrigatório e deve ser maior que zero.
+        </div>
+      </div>
+  
+      <!-- Categoria -->
+      <div class="mb-3">
+        <label for="productCategory" class="form-label">Departamento</label>
+        <select
+          id="productCategory"
+          class="form-select"
+          formControlName="departamento"
+          [ngClass]="{'is-invalid': productForm.get('departamento')?.touched && productForm.get('departamento')?.invalid}"
+        >
+          <option value="" disabled>Selecione uma Departamento</option>
+
+          <!-- <option value="010">Eletrônicos</option>
+          <option value="020">Roupas</option>
+          <option value="030">Alimentos</option>
+          <option value="040">Móveis</option> -->
+          <option *ngFor="let departamento of dataSource" [value]="departamento.codigo">
+            {{ departamento.descricao }}
+          </option>
+        </select>
+        <div *ngIf="productForm.get('departamento')?.touched && productForm.get('departamento')?.invalid" class="invalid-feedback">
+          Selecione uma Departamento.
+        </div>
+      </div>
+  
+      <!-- Botões -->
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Salvar</button>
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  

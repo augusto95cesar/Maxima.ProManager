@@ -13,14 +13,18 @@ namespace ProManager.Application.Services
             _produtoRepository = produtoRepository;
         }
 
-        public async Task<IEnumerable<Produto>> ObterTodosAsync() => await _produtoRepository.GetAllAsync();
-
-        public async Task<Produto> ObterPorIdAsync(int id) => await _produtoRepository.GetByIdAsync(id);
-
+        public async Task<IEnumerable<Produto>> ObterTodosAsync() => await _produtoRepository.GetAllAsync(); 
         public async Task AdicionarAsync(Produto produto) => await _produtoRepository.AddAsync(produto);
 
         public async Task<bool> AtualizarAsync(Produto produto) => await _produtoRepository.UpdateAsync(produto);
 
-        public async Task<bool> RemoverAsync(int id) => await _produtoRepository.DeleteAsync(id);
+        public async Task<bool> RemoverAsync(string id) => await _produtoRepository.DeleteAsync(id);
+
+        public async Task<bool> ProdutoExist(string codigo)
+        {
+            Produto? produto = await _produtoRepository.GetByCodigoAsync(codigo);
+
+            return produto != null ? true : false;
+        }
     }
 }

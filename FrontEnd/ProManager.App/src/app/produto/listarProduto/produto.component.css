@@ -1,0 +1,8 @@
+.l-produto-new {
+    display: flex;
+    justify-content: flex-end;
+    background: var(--bs-blue);
+    padding: 10px; 
+    border-radius: 5px;
+    margin-bottom: 10px;
+}

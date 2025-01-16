@@ -1,0 +1,30 @@
+
+
+<div class="container mt-5">
+    <div class="l-produto-new ">
+        <a href="/createproduto" class="btn btn-light">Adicionar Produto</a>
+    </div>
+    
+    <h2 class="mb-4">Lista de Produtos</h2>
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of dataSource; let i = index">
+                <td>{{ product.codigo }}</td>
+                <td>{{ product.descricao }}</td>
+                <td>{{ product.preco | currency: 'BRL' }}</td>
+                <td>
+                    <!-- <button class="btn btn-primary btn-sm me-2" (click)="editProduct(product.codigo)">Editar</button> -->
+                    <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.codigo)">Excluir</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
