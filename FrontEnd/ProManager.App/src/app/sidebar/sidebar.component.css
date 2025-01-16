@@ -5,3 +5,13 @@
     left: 0;
     top: 0;
   }
+
+  a.navbar-brand.pointer {
+    cursor: pointer;
+}
+a.nav-link.pointer {
+  cursor: pointer;
+}
+a.nav-link.active.pointer {
+  cursor: pointer;
+}

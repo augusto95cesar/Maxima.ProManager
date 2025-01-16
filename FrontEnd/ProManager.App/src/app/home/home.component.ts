@@ -18,4 +18,17 @@ export class HomeComponent {
     ngOnInit(): void {
         this.userLogado = this.auth.getUser();
     } 
+
+    createProduto(){
+        this.router.navigate(['/createproduto'])
+    }
+
+    produto(){
+        this.router.navigate(['/produto'])
+    }
+
+    relatorio(){
+        alert("não existe relatorio cadastrado")
+        this.router.navigate(['/home'])
+    }
 }

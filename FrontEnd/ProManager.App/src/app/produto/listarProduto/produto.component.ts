@@ -5,51 +5,67 @@ import { CommonModule } from '@angular/common'; // Importe o CommonModule
 import { AuthService } from '../../../core/service/authService';
 import { ProdutoService } from '../../../core/service/produtos.service';
 import { Produtos } from '../../../core/models/products.models';
-import {  NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 @Component({
-    selector: 'app-produto',
-    imports: [FormsModule, CommonModule, NgFor],
-    templateUrl: './produto.component.html',
-    styleUrl: './produto.component.css'
+  selector: 'app-produto',
+  imports: [FormsModule, CommonModule, NgFor],
+  templateUrl: './produto.component.html',
+  styleUrl: './produto.component.css'
 })
 
 export class ProdutoComponent {
-    dataSource: Produtos[] = []
-    userLogado: string | null = "" ;
-    constructor(private produtoService: ProdutoService, private auth: AuthService, private router: Router) { }
+  dataSource: Produtos[] = []
+  userLogado: string | null = "";
+  constructor(private produtoService: ProdutoService, private auth: AuthService, private router: Router) { }
 
-    ngOnInit(): void {
-      this.loadDeProdutos();
-      this.userLogado = this.auth.getUser();
-    }
+  ngOnInit(): void {
+    this.loadDeProdutos();
+    this.userLogado = this.auth.getUser();
+  }
 
-    loadDeProdutos() {
-        this.produtoService.get().subscribe(
-          (response) => {
-            //console.log(response)
-            this.dataSource = response; 
-          },
-          (error) => {
-            console.error('Erro ao obter dados:', error); 
-          }
-        );
+  loadDeProdutos() {
+    this.produtoService.get().subscribe(
+      (response) => {
+        //console.log(response)
+        this.dataSource = response;
+      },
+      (error) => {
+        console.error('Erro ao obter dados:', error);
       }
+    );
+  }
 
-    editProduct( codigo: string)
-    {
-        console.log("editar: " + codigo);
-    }
+  editProduct(codigo: string) {
+    console.log("editar: " + codigo);
+  }
 
-    deleteProduct(codigo: string){
-        //console.log("editar: " + codigo);  
-        this.produtoService.delete(codigo).subscribe(
-          (response) => { 
-            this.loadDeProdutos();
-          },
-          (error) => {
-            console.error('Erro ao obter dados:', error); 
-          }
-        );
-    }
+  deleteProduct(codigo: string) {
+    //console.log("editar: " + codigo);  
+    this.produtoService.delete(codigo).subscribe(
+      (response) => {
+        this.loadDeProdutos();
+      },
+      (error) => {
+        console.error('Erro ao obter dados:', error);
+      }
+    );
+  }
 
- }
+  createProduto() {
+    this.router.navigate(['/createproduto'])
+  }
+
+  produto() {
+    this.router.navigate(['/produto'])
+  }
+
+  home() {
+    this.router.navigate(['/home'])
+  }
+
+  relatorio() {
+    alert("não existe relatorio cadastrado")
+    this.router.navigate(['/home'])
+  }
+
+}

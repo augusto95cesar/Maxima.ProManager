@@ -110,12 +110,17 @@ builder.Services.AddCors(options =>
 #region App Build & Config App
 var app = builder.Build(); // Build App
 app.UseCors("PoliticaDeCors"); // Habilitar Politica de Cors 
-app.UseSwagger();// Habilitar o Swagger
-app.UseSwaggerUI(c =>
+// Configurar o Swagger para produção também
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Maxima.ProManager.API");
-    c.RoutePrefix = string.Empty; // Para acessar diretamente no root
-});
+    app.UseSwagger();// Habilitar o Swagger
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Maxima.ProManager.API");
+        c.RoutePrefix = string.Empty; // Para acessar diretamente no root
+    });
+}
+
 app.UseHttpsRedirection();
 app.UseAuthentication(); // Middleware para autenticação
 app.UseAuthorization();  // Middleware para autorização 
