@@ -1,12 +1,32 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit  } from '@angular/core';
+import { RouterOutlet, Router, NavigationEnd  } from '@angular/router';
+import { filter } from 'rxjs';
+import { SidebarComponent } from './sidebar/sidebar.component'; // Importe o componente Sidebar
+ import {  NgIf } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports: [RouterOutlet, SidebarComponent, NgIf],
+  templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent 
+//{
+ implements OnInit {
+    isLoginRoute: boolean | any ;
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd)
+      )
+      .subscribe(() => {
+        // Verifica se a rota atual é a de login
+        //alert(this.router.url)
+        this.isLoginRoute = this.router.url !== '/';
+      });
+  }
   title = 'ProManager.App';
 }

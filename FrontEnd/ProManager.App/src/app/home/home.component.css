@@ -1,0 +1,15 @@
+
+  
+  #page-content-wrapper {
+    margin-left: 250px;
+  }
+  
+  body {
+    padding-top: 20px;
+  }
+  
+ #footer-home {
+    position: absolute;
+    bottom: 0vh;
+    width: 100vw;
+}
