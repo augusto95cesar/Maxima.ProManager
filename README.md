@@ -85,5 +85,40 @@ ng build --prod
 5. verifique a url do site se está funcionando corretamente.
 ---
 
-
- 
+## **Downloads dos projetos copilados**
+- [Download](https://github.com/augusto95cesar/Maxima.ProManager/tree/master/Downloads)
+---
+### **Manual de Implantação**
+1. baixe os projetos.
+2. extraia os arquivos na pasta do iis respectivo ao app e api.
+3. abra o arquivo *main-xxxxxx.js* na pasta do app
+4. procure pela variavel **BASE_URL** e mude o valor da url para a url da api.
+5. baixe o banco de dados postgress.
+6. crie um novo banco de dados. 
+7. crie as tabelas tabelas do banco de dados conforme o script : [script postgres](https://github.com/augusto95cesar/Maxima.ProManager/blob/master/aDocs/Script.txt)
+8. abra o arquivo *appsettings.json* na pasta da api
+9. edite a string de conexão para acessar o banco de dados que você criou.
+10. edite a url de cors para dar permissão ao aplicativo.
+---
+# **Auth.Systema**
+### **Para se autenticar e poder usar o sistema, você deve usar o usuario pre cadastrado: *master*.**
+---
+1. faça uma requição do tipo post na url: *http://url-base-api/Auth/login* passando o body abaixo. 
+    ````
+    {
+    "user": "master",
+    "password": "123456"
+    }
+    ````
+2. a api deve retornar um token
+    ````
+        {
+            "token": "Bearer meu-token-gerado-ao-logar-na-api"
+        }
+    ````
+3. a api está usando o swagger, e foi configurado o botão de Authorize do swagger, para você poder testar direto na api.
+----
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/augusto-cesar-61045b167)
+[![Gmail](https://img.shields.io/badge/-Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:augusto95cesar@gmail.com)
+[![WhatsApp](https://img.shields.io/badge/-WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/5562991399381)
+---
