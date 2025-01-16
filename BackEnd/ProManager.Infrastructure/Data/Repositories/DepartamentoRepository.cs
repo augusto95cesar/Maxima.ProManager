@@ -5,6 +5,11 @@ namespace ProManager.Infrastructure.Data.Repositories
 {
     public class DepartamentoRepository : IDepartamentoRepository
     {
+        public Departamento? Get(string codigoDepartamento)
+        {
+            return MockList().Where(x => x.Id == codigoDepartamento).FirstOrDefault();
+        }
+
         public List<Departamento> GetAll()
         {
             return MockList();

@@ -9,5 +9,10 @@ namespace ProManager.Application.Services
         {
             return new DepartamentoRepository().GetAll(); 
         }
+
+        public Departamento? Get(string codigoDepartamento)
+        {
+            return new DepartamentoRepository().Get(codigoDepartamento);
+        }
     }
 }
